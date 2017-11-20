@@ -12,8 +12,8 @@
 <body>
 <script type="text/javascript">
 
-    var cityUrl = "http://localhost/BF2World/alt.php/city";
-    var countryUrl = "http://localhost/BF2World/alt.php/country";
+    var cityUrl = "http://localhost/RandomCountryExtension/alt.php/city";
+    var countryUrl = "http://localhost/RandomCountryExtension/alt.php/country";
 
 mainfunction();
     function mainfunction() {
@@ -36,17 +36,16 @@ mainfunction();
             var population = countryArray[randomNumber].Population;
             var GNP = countryArray[randomNumber].GNP;
 //write the info to screen
-            document.write("country: ", country, "continent: ", continent, "region: ", region, "pop: ", population, "GNP: ", GNP);
+            document.write(" country: ", country, " continent: ", continent, " region: ", region, " pop: ", population, " GNP: ", GNP);
 
 //get capital number of the country
             var capitalNumber = countryArray[randomNumber].Capital;
             $.get((cityUrl + "/" + capitalNumber), function (data2) {
                 var capitalData = JSON.parse(data2);
-                var count2 = capitalData.length;
-                console.log(count2);
                 var capital = capitalData.Name;
+                var capitalPopulation = capitalData.Population;
                 document.write("<br>");
-                document.write("----------------- capitalnumber: ",capitalNumber,"capital: ",capital);
+                document.write("----------------- capitalnumber: ",capitalNumber," capital: ",capital, " capPop: ", capitalPopulation);
 
 /*//get other cities
                 $.get(cityUrl, function (data3) {
