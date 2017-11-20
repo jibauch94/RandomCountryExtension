@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+</head>
+<body>
+<script type="text/javascript">
+
+    var cityUrl = "http://localhost/BF2World/alt.php/city";
+    var countryUrl = "http://localhost/BF2World/alt.php/country";
+
+mainfunction();
+    function mainfunction() {
+
+        $.get(countryUrl, function (data) {
+//parse json data
+            var countryArray = JSON.parse(data);
+// get array length
+            var count = countryArray.length;
+            console.log(count);
+
+// generating a random number
+            var randomNumber = Math.floor((Math.random() * count) + 1);
+            document.write(randomNumber);
+
+//info about the country
+            var country = countryArray[randomNumber].Name;
+            var continent = countryArray[randomNumber].Continent;
+            var region = countryArray[randomNumber].Region;
+            var population = countryArray[randomNumber].Population;
+            var GNP = countryArray[randomNumber].GNP;
+//write the info to screen
+            document.write("country: ", country, "continent: ", continent, "region: ", region, "pop: ", population, "GNP: ", GNP);
+
+//get capital number of the country
+            var capitalNumber = countryArray[randomNumber].Capital;
+            $.get((cityUrl + "/" + capitalNumber), function (data2) {
+                var capitalData = JSON.parse(data2);
+                var count2 = capitalData.length;
+                console.log(count2);
+                var capital = capitalData.Name;
+                document.write("<br>");
+                document.write("----------------- capitalnumber: ",capitalNumber,"capital: ",capital);
+
+/*//get other cities
+                $.get(cityUrl, function (data3) {
+                    var cityArray = JSON.parse(data3);
+                    var citiesArray = [];
+                    for (var i = 0; i < cityArray.length; i++) {
+                        if (cityArray[i].CountryCode == countryArray[randomNumber].Code) {
+                            if (cityArray[i].ID != capitalNumber) {
+                                citiesArray.push(cityArray[i].Name);
+                            }
+                        }
+                        document.write("<br>", citiesArray);
+                    }
+
+
+                });*/
+
+            });
+
+        });
+
+    }
+</script>
+
+</body>
+</html>
