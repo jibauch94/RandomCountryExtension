@@ -8,6 +8,8 @@
 ?>
 <?php
 
+header("Access-Control-Allow-Origin: *");
+
 // get the HTTP method, path and body of the request
 $method = $_SERVER['REQUEST_METHOD']; // request method kan håndtere put, get og post
 $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
